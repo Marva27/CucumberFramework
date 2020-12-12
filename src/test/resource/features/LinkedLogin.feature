@@ -16,14 +16,13 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-@LinkedInLogin
-Feature: Login to LinkedIn
-  I want to test the login functionality of LinkedIn application
+@LinkedinLogin
+Feature: Linkedin Login
+  I want to test the functionality of Linkedin Login page
 
-  @ValidLoginCredentials
-  Scenario: Attempt LinkedIn Login with valid credentials
-    Given I am on LinkedIn login page
-    When I enter valid username as "srinimarva@gmail.com"
-    And I enter valid password as "Orange@27"
-    And I click Login button
-    Then I should see the LinkedIn Home page
+  @AttemptLogin
+  Scenario: Attempt Linkedin Login
+    Given I am on Linkedin Login page
+    When I enter my email address as "srinimarva@gmail.com", password as "Orange@27"
+    And I click the Login button
+    Then I should see Linkedin Home page

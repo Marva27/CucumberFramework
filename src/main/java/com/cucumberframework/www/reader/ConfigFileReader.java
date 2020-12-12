@@ -46,15 +46,21 @@ public class ConfigFileReader {
 	}
 	
 	public String getTestApplicationUrl() {
-		String url = properties.getProperty("testUrl");
+		String url = properties.getProperty("test_url");
 		if(url != null) return url;
-		else throw new RuntimeException("testUrl not specified in configuration.properties file.");
+		else throw new RuntimeException("test_url not specified in configuration.properties file.");
 	}
 	
 	public String getStageApplicationUrl() {
-		String url = properties.getProperty("stageUrl");
+		String url = properties.getProperty("stage_url");
 		if(url != null) return url;
-		else throw new RuntimeException("stageUrl not specified in configuration.properties file.");
+		else throw new RuntimeException("stage_url not specified in configuration.properties file.");
+	}
+	
+	public String getProdApplicationUrl() {
+		String url = properties.getProperty("prod_url");
+		if(url != null) return url;
+		else throw new RuntimeException("prod_url not specified in configuration.properties file.");
 	}
 
 }
