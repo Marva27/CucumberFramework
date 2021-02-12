@@ -21,8 +21,15 @@ Feature: Linkedin Login
   I want to test the functionality of Linkedin Login page
 
   @AttemptLogin
-  Scenario: Attempt Linkedin Login
+  Scenario Outline: Attempt Linkedin Login
     Given I am on Linkedin Login page
-    When I enter my email address as "srinimarva@gmail.com", password as "Orange@27"
+    When I enter my email address as "<userName>", password as "<password>"
     And I click the Login button
-    Then I should see Linkedin Home page
+    Then I should see name as "<expProfileName>"
+
+    Examples: 
+      | userName               | password     | expProfileName    |
+      | vijaymak2004@gmail.com | Sainiya@1215 | Vijay Govindasamy |
+
+
+ 

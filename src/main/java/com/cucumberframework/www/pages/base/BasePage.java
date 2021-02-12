@@ -2,9 +2,12 @@ package com.cucumberframework.www.pages.base;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -14,10 +17,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import com.cucumberframework.www.utility.Utility;
 
 import cucumber.api.Scenario;
+import cucumber.runtime.snippets.Concatenator;
 
 public class BasePage {
 	
@@ -427,4 +432,184 @@ public class BasePage {
 	
 	}
 	
+	
+	
+	
+	
+	/*
+	 * VJ's reusable action methods
+	 */
+
+	public boolean  isCheckBoxSelected (WebElement element) {		
+		try {
+			if (element.isSelected()) {
+				return true;	
+			}else {
+				return false;
+			}
+		} catch (Exception e) {
+	      System.out.println(e.getMessage());
+	      return false;
+		}		
+		
+	}	
+	
+	public void selectCheckBox (WebElement element,Scenario currentScenario) throws IOException {		
+		try {
+			if (!isCheckBoxSelected(element))
+				element.click();
+			
+		} catch (Exception e) {
+			currentScenario.embed(Files.readAllBytes(Utility.captureScreenshot(browser, false).toPath()), "image/png");
+			Assert.fail("Error in locating element. Please contact automation developer.");
+		}
+		
+					
+	}
+	
+	//verify an element is displayed on the page
+	
+	public boolean  isDisplayed (WebElement element,Scenario currentScenario) throws IOException {		
+		try {
+			if (element.isDisplayed()) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+			//currentScenario.embed(Files.readAllBytes(Utility.captureScreenshot(browser, false).toPath()), "image/png");
+			//Assert.fail("Error in locating element. Please contact automation developer.");
+		}
+		//return false;	
+		
+	}	
+	
+	// MoreTravel menu selection
+	
+	public void eleClick(WebElement element, Scenario currentScenario) {
+		element.click();		
+	}
+	
+	// MoreTravel menu option selection
+	public void menuOptionSelect(WebElement element, Scenario currentScenario) {
+		element.click();		
+	}
+	
+	
+	//switch to pop up
+	
+	public void clickElementAndswitchToPopUp(WebElement element) {
+		
+		String mainWindowHandle=browser.getWindowHandle();
+		element.click();
+		Set<String> s = browser.getWindowHandles();
+		 Iterator<String> ite = s.iterator();
+         while(ite.hasNext())
+         {
+              String popupHandle=ite.next().toString();
+              if(!popupHandle.contains(mainWindowHandle))
+              {
+                    browser.switchTo().window(popupHandle);
+              }
+         }
+		
+	}
+	
+	//month picker picks up the month and sets run time xpath
+	
+	public void datePicker(String TravelDate, Scenario currentScenario) throws IOException {			
+		
+		String date[] = TravelDate.split("-");
+		//System.out.println(date[1]);
+		String mmAndyyyy = date[1]+" "+date[2];
+		System.out.println(mmAndyyyy);
+		
+		String month = date[1].substring(0,3)+" "+"1"+","+" "+date[2];
+		System.out.println(month);
+		
+		String xpath ="//button[contains(@aria-label,\"trimMonth\")]";
+		String xpath1 = xpath.replaceAll("trimMonth", month);
+		System.out.println(xpath1);
+		WebElement DateXpath = browser.findElement(By.xpath(xpath1));
+		
+		try {							
+			DateXpath.click();			
+		} catch (Exception e) {
+			currentScenario.embed(Files.readAllBytes(Utility.captureScreenshot(browser, false).toPath()), "image/png");
+			Assert.fail("Error in locating element. Please contact automation developer.");
+		}
+				
+		
+	}
+	
+	
+	//Adding passenger count
+	
+	public void addPassenger(WebElement element, int count, Scenario currentScenario) throws IOException {			
+		
+			
+		try {							
+			for (int i = 0;i<count;i++) {
+				element.click();
+			}
+				
+		} catch (Exception e) {
+			currentScenario.embed(Files.readAllBytes(Utility.captureScreenshot(browser, false).toPath()), "image/png");
+			Assert.fail("Error in locating element. Please contact automation developer.");
+		}
+				
+		
+	}
+	
+	//Flight class Selection
+	
+	
+	
+	public void classSelection(String Flightclass, Scenario currentScenario) throws IOException {			
+		
+		
+		try {							
+			
+			if(Flightclass.equals("Economy")) {
+				browser.findElement(By.xpath("//*[@id=\"preferred-class-input\"]/div/div/a[1]")).click();					
+			}else if(Flightclass.equals("PremiumEconomy")) {
+				browser.findElement(By.xpath("//*[@id=\"preferred-class-input\"]/div/div/a[2]")).click();					
+			}else if(Flightclass.equals("BusinessClass")) {
+				browser.findElement(By.xpath("//*[@id=\"preferred-class-input\"]/div/div/a[3]")).click();					
+			}else if(Flightclass.equals("FirstClass")) {
+				browser.findElement(By.xpath("//*[@id=\"preferred-class-input\"]/div/div/a[4]")).click();			
+			}				
+				
+		} catch (Exception e) {
+			currentScenario.embed(Files.readAllBytes(Utility.captureScreenshot(browser, false).toPath()), "image/png");
+			Assert.fail("Error in locating element. Please contact automation developer.");
+		}
+				
+		
+	}
+	
+	//get text of an element and compare
+	
+	public  void tripTypeVerifyAndSelection(WebElement element,Scenario currentScenario) throws IOException {		
+		try {
+			String selectedTrip = element.getAttribute("aria-selected");
+			if (selectedTrip.equals("true")) {				
+			}else {
+			   eleClick(element, currentScenario);
+			}
+		} catch (Exception e) {
+			currentScenario.embed(Files.readAllBytes(Utility.captureScreenshot(browser, false).toPath()), "image/png");
+			Assert.fail("Error in locating element. Please contact automation developer.");
+		}		
+	}
+	
+	
+	
+	
 }
+
+	
+
+
+

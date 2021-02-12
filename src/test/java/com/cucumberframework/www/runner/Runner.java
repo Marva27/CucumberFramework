@@ -17,7 +17,7 @@ import cucumber.api.testng.TestNGCucumberRunner;
 @CucumberOptions(
 		features = "src/test/resource/features",
 		glue = {"com.cucumberframework.www.steps"},		
-		tags = {"@AttemptLogin"},
+		tags = {"@AttemptMercuryLogin"},
 		plugin = {
 				"pretty",
 				"rerun:target/cucumber-reports/rerun.txt",
@@ -54,5 +54,7 @@ public class Runner {
 		report.generateReport();
 		System.out.println("Done!!!!");
 	}
+	
+	
 
 }

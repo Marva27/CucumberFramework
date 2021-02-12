@@ -41,23 +41,25 @@ public class LinkedInLoginSteps {
 	    	browser.get(FileReaderManager.getInstance().getConfigReader().getProdApplicationUrl());
 	    currentScenario.embed(Files.readAllBytes(Utility.captureScreenshot(browser, false).toPath()), "image/png");
 	}
-
+	
 	@When("^I enter my email address as \"([^\"]*)\", password as \"([^\"]*)\"$")
-	public void i_enter_my_email_address_as_password_as(String arg1, String arg2) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	public void i_enter_my_email_address_as_password_as(String userName, String password) throws Throwable {
+		//linkedinLoginPage = testContext.getPageObjectManager().getLinkedInLoginPage();		
+		linkedinLoginPage.enterLoginCredentials(userName, password, currentScenario);
+		
+		
 	}
 
 	@When("^I click the Login button$")
 	public void i_click_the_Login_button() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+		linkedinLoginPage.clickSignIn(currentScenario);
 	}
 
-	@Then("^I should see Linkedin Home page$")
-	public void i_should_see_Linkedin_Home_page() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	@Then("^I should see name as \"([^\"]*)\"$")
+	public void i_should_see_name_as(String expResult) throws Throwable {
+		
+		linkedinLoginPage.verifySignIn(expResult, currentScenario);
+		
 	}
 	
 }

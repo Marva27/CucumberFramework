@@ -68,7 +68,7 @@ public class WebDriverManager {
 			browser = new FirefoxDriver();
 		break;
 		case CHROME:
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "//drivers//chromedriver");
+			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "//drivers//chromedriver.exe");
 			browser = new ChromeDriver();
 		break;
 		case INTERNETEXPLORER:
