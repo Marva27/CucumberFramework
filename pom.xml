@@ -101,6 +101,18 @@
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.20.1</version>
+          <configuration>
+			<properties>
+			        <property>
+			            <name>dataproviderthreadcount</name>
+			            <value>2</value>
+			        </property>
+			    </properties>
+			<testFailureIgnore>false</testFailureIgnore>
+			<suiteXmlFiles>
+			<suiteXmlFile>testng.xml</suiteXmlFile>
+			</suiteXmlFiles>
+			</configuration>
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
