@@ -1,8 +1,5 @@
 package com.cucumberframework.www.runner;
 
-import java.io.File;
-
-import org.apache.commons.io.FileUtils;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -17,7 +14,7 @@ import cucumber.api.testng.TestNGCucumberRunner;
 @CucumberOptions(
 		features = "src/test/resource/features",
 		glue = {"com.cucumberframework.www.steps"},		
-		tags = {"@AttemptMercuryLogin, @Test"},
+		tags = {"@AttemptNewInventorySearch, @Test"},
 		plugin = {
 				"pretty",
 				"rerun:target/cucumber-reports/rerun.txt",

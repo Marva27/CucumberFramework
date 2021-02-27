@@ -31,8 +31,6 @@ WebElement passWord;
 @FindBy(css="input[name=\"submit\"]")
 WebElement submitLogin;
 
-//@FindBy(xpath = "/html/body/div[2]/table/tbody/tr/td[2]/table/tbody/tr[2]/td/table/tbody/tr/td[1]/a")
-
 
 	public void enterMercuryLogin(String UserID,String Password,Scenario currentScenario) throws IOException {
 				
