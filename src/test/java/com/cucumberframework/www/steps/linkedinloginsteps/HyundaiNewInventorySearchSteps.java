@@ -3,6 +3,7 @@ package com.cucumberframework.www.steps.linkedinloginsteps;
 import java.nio.file.Files;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import com.cucumberframework.www.context.TestContext;
 import com.cucumberframework.www.managers.FileReaderManager;
@@ -54,20 +55,20 @@ public class HyundaiNewInventorySearchSteps {
 			hyundaiHomePage.verifyNewInventorySearchSuccess(currentScenario);
 		}
 		
-		@When("^I select filter type  as \"([^\"]*)\"$")
-		public void i_select_filter_type_as(String arg1) throws Throwable {
-
+		@When("^I select filter model as \"([^\"]*)\"$")
+		public void i_select_filter_model_as(String model) throws Throwable {
+			hyundaiSearchResultPage.applyFilter(model, currentScenario);
 		}
 
 		
-		@When("^I select car model as \"([^\"]*)\"$")
-		public void i_select_car_model_as(String Model) throws Throwable {
-			hyundaiSearchResultPage.selectFilterType(Model, currentScenario);
+		@When("^I select filter year as \"([^\"]*)\"$")
+		public void i_select_filter_year_as(String year) throws Throwable {			
+			hyundaiSearchResultPage.applyFilter(year, currentScenario);			
 		}
 		
 		@Then("^I verify the total count of the search result match with listed items in the search result$")
-		public void i_verify_the_total_count_of_the_search_result_match_with_listed_items_in_the_search_result() throws Throwable {
-
+		public void i_verify_the_total_count_of_the_search_result_match_with_listed_items_in_the_search_result() throws Throwable {			
+			hyundaiSearchResultPage.verifyVehicleCount(currentScenario);
 		}
 		
 }

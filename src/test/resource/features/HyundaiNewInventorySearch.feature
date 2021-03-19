@@ -20,14 +20,16 @@
 Feature: Title of your feature
   I want to test the functionality of new inventory search
 
+  #Background for login and common methods
+
   @AttemptNewInventorySearch
   Scenario Outline: New Inventory Search
     Given I navigate to hyundai home page
     When I click new inventory
-    And I select filter type  as "<FilterType>"
-    And I select car model as "<Model>"
+    And I select filter model as "<Model>"
+    And I select filter year as "<Year>"
     Then I verify the total count of the search result match with listed items in the search result
 
     Examples: 
-      | FilterType | Model    |
-      | Model      | Santa Fe |
+      | Model    | Year |
+      | Santa Fe | 2020 |

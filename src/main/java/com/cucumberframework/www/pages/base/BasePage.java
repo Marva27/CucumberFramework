@@ -17,12 +17,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.cucumberframework.www.utility.Utility;
 
 import cucumber.api.Scenario;
-import cucumber.runtime.snippets.Concatenator;
 
 public class BasePage {
 	
@@ -191,7 +188,7 @@ public class BasePage {
 		boolean staleElement = true;
 		while (staleElement && i < 2) {
 			try {
-				browser.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+				//browser.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 				WebDriverWait wait = new WebDriverWait(browser, seconds);
 				wait.until(ExpectedConditions.visibilityOf(element));
 				return true;
@@ -605,6 +602,18 @@ public class BasePage {
 	}
 	
 	
+	public boolean waitForElementOrPage(WebElement element,int seconds) {
+		try {
+			browser.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		    WebDriverWait wait = new WebDriverWait(browser, seconds);
+		    wait.until(ExpectedConditions.visibilityOf(element));
+		    return true;
+		} catch (Exception e) {
+			return false;
+		}
+
+	    
+	}
 	
 	
 }
